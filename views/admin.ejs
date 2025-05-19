@@ -70,13 +70,15 @@
         <h1>Quản lý trạng thái Website</h1>
         <div class="button-group">
             <form method="POST" action="/maintenance">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button type="submit" class="maintenance-btn">🔒 Bảo trì web</button>
             </form>
             <form method="POST" action="/resume">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button type="submit" class="resume-btn">✅ Mở lại web</button>
             </form>
         </div>
         <a href="/logout" class="logout-link">Đăng xuất</a>
     </div>
 </body>
-</html>
+</html> 
