@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -8,7 +9,21 @@ const port = process.env.PORT || 3000;
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
+// Đọc trạng thái bảo trì từ file
 let isMaintenance = false;
+try {
+  const data = fs.readFileSync('maintenance.txt', 'utf8');
+  isMaintenance = data.trim() === 'true';
+} catch (err) {
+  // Nếu file chưa tồn tại, tạo file mới
+  fs.writeFileSync('maintenance.txt', 'false');
+}
+
+// Hàm lưu trạng thái bảo trì
+function saveMaintenanceState(state) {
+  fs.writeFileSync('maintenance.txt', state.toString());
+  isMaintenance = state;
+}
 
 // Trang chính
 app.get("/", (req, res) => {
@@ -159,7 +174,7 @@ app.get("/admin", (req, res) => {
 // Bật bảo trì
 app.post("/maintenance", (req, res) => {
   console.log('Bật chế độ bảo trì');
-  isMaintenance = true;
+  saveMaintenanceState(true);
   console.log('Trạng thái sau khi bật:', isMaintenance);
   res.redirect("/admin");
 });
@@ -167,7 +182,7 @@ app.post("/maintenance", (req, res) => {
 // Mở lại
 app.post("/resume", (req, res) => {
   console.log('Tắt chế độ bảo trì');
-  isMaintenance = false;
+  saveMaintenanceState(false);
   console.log('Trạng thái sau khi tắt:', isMaintenance);
   res.redirect("/admin");
 });
