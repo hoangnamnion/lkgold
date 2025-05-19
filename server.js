@@ -12,6 +12,7 @@ let isMaintenance = false;
 
 // Trang chính
 app.get("/", (req, res) => {
+  console.log('Trạng thái bảo trì:', isMaintenance);
   if (isMaintenance) {
     res.send(`
       <!DOCTYPE html>
@@ -119,6 +120,20 @@ app.get("/admin", (req, res) => {
         .resume-btn:hover {
           background-color: #218838;
         }
+        .status {
+          text-align: center;
+          margin-top: 1rem;
+          padding: 1rem;
+          border-radius: 4px;
+        }
+        .status.maintenance {
+          background-color: #dc3545;
+          color: white;
+        }
+        .status.normal {
+          background-color: #28a745;
+          color: white;
+        }
       </style>
     </head>
     <body>
@@ -132,6 +147,9 @@ app.get("/admin", (req, res) => {
             <button type="submit" class="resume-btn">✅ Mở lại web</button>
           </form>
         </div>
+        <div class="status ${isMaintenance ? 'maintenance' : 'normal'}">
+          Trạng thái hiện tại: ${isMaintenance ? 'ĐANG BẢO TRÌ' : 'ĐANG HOẠT ĐỘNG'}
+        </div>
       </div>
     </body>
     </html>
@@ -140,13 +158,17 @@ app.get("/admin", (req, res) => {
 
 // Bật bảo trì
 app.post("/maintenance", (req, res) => {
+  console.log('Bật chế độ bảo trì');
   isMaintenance = true;
+  console.log('Trạng thái sau khi bật:', isMaintenance);
   res.redirect("/admin");
 });
 
 // Mở lại
 app.post("/resume", (req, res) => {
+  console.log('Tắt chế độ bảo trì');
   isMaintenance = false;
+  console.log('Trạng thái sau khi tắt:', isMaintenance);
   res.redirect("/admin");
 });
 
