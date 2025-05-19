@@ -1,0 +1,678 @@
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cao Văn Nam | Facebook</title>
+    <style>
+        :root {
+            --primary: #1877f2;
+            --success: #42b72a;
+            --danger: #ff3333;
+            --dark: #1c1e21;
+            --light: #f0f2f5;
+            --text: #050505;
+            --text-secondary: #65676b;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 680px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+        
+        .profile-info {
+            margin-left: 20px;
+            flex: 1;
+        }
+        
+        .profile-name {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .verified-badge {
+            width: 20px;
+            height: 20px;
+            margin-left: 8px;
+        }
+        
+        .profile-bio {
+            color: var(--text-secondary);
+            margin: 5px 0 10px;
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .stat-icon {
+            margin-right: 5px;
+        }
+        
+        .section {
+            padding: 18px 20px;
+            border-bottom: 1px solid #dddfe2;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 10px;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        
+        .info-value {
+            word-break: break-word;
+        }
+        
+        .info-value a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .info-value a:hover {
+            text-decoration: underline;
+        }
+        
+        .app-card {
+            background: #f5f6f7;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .app-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .app-title {
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .download-app-btn {
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .download-app-btn:hover {
+            background-color: #333;
+        }
+        
+        .download-app-btn i {
+            margin-right: 5px;
+        }
+        
+        .app-content {
+            display: flex;
+            align-items: center;
+        }
+        
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            margin-right: 15px;
+        }
+        
+        .app-details {
+            flex: 1;
+        }
+        
+        .app-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .app-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .copy-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .copy-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn i {
+            margin-right: 6px;
+        }
+        
+        .copy-account {
+            background: #e7f3ff;
+            color: var(--primary);
+        }
+        
+        .copy-password {
+            background: #e8f5e9;
+            color: var(--success);
+        }
+        
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .action-btn {
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        
+        .action-btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background: #166fe5;
+        }
+        
+        .btn-success {
+            background: var(--success);
+        }
+        
+        .btn-success:hover {
+            background: #36a420;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            max-width: 90%;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        .browser-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .browser-notification.show {
+            opacity: 1;
+        }
+        
+        .messenger-warning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--danger);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            z-index: 1100;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .messenger-warning p {
+            margin-bottom: 15px;
+        }
+        
+        .open-safari-btn {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .copy-fallback {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+        
+        .copy-content {
+            background: #2d3436;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            width: 90%;
+            max-width: 500px;
+            word-break: break-all;
+        }
+        
+        .close-fallback {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-info {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .copy-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+    <div id="messengerWarning" class="messenger-warning">
+        <p><i class="fas fa-exclamation-triangle"></i> Bắt Buộc Phải Mở Bằng Safari  </p>
+        <button id="openSafariBtn" class="open-safari-btn">
+            <i class="fas fa-external-link-alt"></i> Mở Đi, Rồi Lại Bảo Lỗi Không Lên GOLD
+        </button>
+    </div>
+
+    <div id="browserNotification" class="browser-notification"></div>
+
+    <div id="copyFallback" class="copy-fallback">
+        <h3><i class="fas fa-exclamation-circle"></i> Vui lòng sao chép thủ công</h3>
+        <p>Trình duyệt không hỗ trợ sao chép tự động</p>
+        <div id="fallbackText" class="copy-content"></div>
+        <button class="close-fallback">Đã sao chép xong</button>
+    </div>
+
+    <div class="container">
+        <div class="profile-header">
+            <img src="https://i.pinimg.com/736x/18/6b/0e/186b0ef18116c2f917f99b6301bf002a.jpg" alt="Profile" class="profile-pic" loading="lazy">
+            <div class="profile-info">
+                <h1 class="profile-name">
+                    Cao Văn Nam
+                    <img src="https://lennguyenmedia.com/wp-content/uploads/2021/11/image-18.png" alt="Verified" class="verified-badge" loading="lazy">
+                </h1>
+                <p class="profile-bio">Sống tại Thanh Hóa (Hoằng Hóa) · Hà Nội</p>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-user-graduate stat-icon"></i>
+                        <span>ĐH Công Nghệ GTVT</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-birthday-cake stat-icon"></i>
+                        <span>Ngày sinh 26/04/2005 </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> Thông tin cá nhân</h2>
+            <div class="info-grid">
+                <div class="info-label">Locket:</div>
+                <div class="info-value"><a href="#">locket.camera/links/namber005</a></div>
+                
+                <div class="info-label">Ngân hàng:</div>
+                <div class="info-value">Techcombank</div>
+                
+                <div class="info-label">STK:</div>
+                <div class="info-value">2005838699</div>
+                
+                <div class="info-label">Tên TK:</div>
+                <div class="info-value">CAO VAN NAM</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-rocket"></i> Locket Gold Hoàng Nam  💛 </h2>
+            
+            <div class="app-card">
+                <div class="app-header">
+                    <div class="app-title">Shadowrocket</div>
+                    <a href="https://apps.apple.com/vn/app/shadowrocket/id932747118?l=vi" class="download-app-btn" target="_blank">
+                        <i class="fas fa-download"></i> Tải app
+                    </a>
+                </div>
+                
+                <div class="app-content">
+                    <img src="https://cdn6.aptoide.com/imgs/0/c/9/0c98ead948282258946d3c71b2a94c14_icon.png" alt="Shadowrocket" class="app-icon" loading="lazy">
+                    
+                    <div class="app-details">
+                        <div class="app-desc">Tài khoản AppStore</div>
+                        <div class="copy-buttons">
+                            <button id="copyAccountBtn" class="copy-btn copy-account">
+                                <i class="far fa-user"></i>
+                                <span>Sao chép tài khoản</span>
+                            </button>
+                            <button id="copyPasswordBtn" class="copy-btn copy-password">
+                                <i class="fas fa-lock"></i>
+                                <span>Sao chép mật khẩu</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="shadowrocket://install?module=https://raw.githubusercontent.com/caovannam2ka5/LocketGoldd/refs/heads/main/locketGoldmodule" class="action-btn btn-primary" target="_blank">
+                    <i class="fas fa-download"></i> Lệnh 1 
+                </a>
+                <a href="shadowrocket://config/add/https://raw.githubusercontent.com/caovannam2ka5/LocketGoldd/refs/heads/main/LocketGold_HoangNam" class="action-btn btn-primary" target="_blank">
+                    <i class="fas fa-cog"></i> Lệnh 2 
+                </a>
+                <a href="https://dl.dropboxusercontent.com/scl/fi/8r9awfrmrtj07g33brc1s/LocketGold_Ho-ng_Nam_i-2.crt?rlkey=0pg68szlycjiu97itrzhyoc44&amp;st=u4c4wmyl&amp;dl=1" class="action-btn btn-success" target="_blank">
+                    <i class="fas fa-mobile-alt"></i> Lệnh 3 
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // Thông tin tài khoản
+        const ACCOUNT_INFO = {
+            username: 'levanlanh24102005@icloud.com',
+            password: 'L@nh2005'
+        };
+        
+        // Khởi tạo khi trang tải xong
+        document.addEventListener('DOMContentLoaded', function() {
+            initBrowserNotification();
+            checkMessenger();
+            setupCopyButtons();
+            setupSafariButton();
+        });
+        
+        // Hiển thị thông báo trình duyệt
+        function initBrowserNotification() {
+            const notification = document.getElementById('browserNotification');
+            const browser = detectBrowser();
+            
+            notification.innerHTML = `<i class="fas fa-globe"></i> Đang dùng ${browser}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Phát hiện trình duyệt
+        function detectBrowser() {
+            const ua = navigator.userAgent;
+            
+            if (/FBAN|FBAV/i.test(ua)) return 'Facebook Messenger';
+            if (/Instagram/i.test(ua)) return 'Instagram';
+            if (/Safari/i.test(ua) && !/Chrome/i.test(ua)) return 'Safari';
+            if (/Chrome/i.test(ua)) return 'Chrome';
+            if (/Firefox/i.test(ua)) return 'Firefox';
+            if (/Edge/i.test(ua)) return 'Edge';
+            return 'Trình duyệt web';
+        }
+        
+        // Kiểm tra nếu là Messenger
+        function checkMessenger() {
+            if (/FBAN|FBAV/i.test(navigator.userAgent)) {
+                document.getElementById('messengerWarning').style.display = 'flex';
+            }
+        }
+        
+        // Thiết lập nút sao chép
+        function setupCopyButtons() {
+            const copyAccountBtn = document.getElementById('copyAccountBtn');
+            const copyPasswordBtn = document.getElementById('copyPasswordBtn');
+            
+            copyAccountBtn.addEventListener('click', () => handleCopy('username'));
+            copyPasswordBtn.addEventListener('click', () => handleCopy('password'));
+        }
+        
+        // Xử lý sao chép
+        async function handleCopy(type) {
+            const text = ACCOUNT_INFO[type];
+            const label = type === 'username' ? 'tài khoản' : 'mật khẩu';
+            
+            try {
+                // Thử phương pháp Clipboard API hiện đại
+                if (navigator.clipboard) {
+                    await navigator.clipboard.writeText(text);
+                    showToast(`✅ Đã sao chép ${label}`);
+                    updateButtonState(type, true);
+                    return;
+                }
+                
+                // Phương pháp dự phòng (textarea)
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.top = '0';
+                textarea.style.left = '0';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                
+                const success = document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                if (success) {
+                    showToast(`📋 Đã sao chép ${label} (thủ công)`);
+                    updateButtonState(type, true);
+                } else {
+                    showCopyFallback(text, label);
+                }
+            } catch (error) {
+                console.error('Lỗi sao chép:', error);
+                showCopyFallback(text, label);
+            }
+        }
+        
+        // Hiển thị popup sao chép thủ công
+        function showCopyFallback(text, label) {
+            const fallback = document.getElementById('copyFallback');
+            const fallbackText = document.getElementById('fallbackText');
+            
+            fallbackText.textContent = text;
+            fallback.style.display = 'flex';
+            
+            // Đóng popup khi click nút
+            fallback.querySelector('button').addEventListener('click', () => {
+                fallback.style.display = 'none';
+                showToast(`📋 Đã sao chép ${label} thủ công`);
+            }, { once: true });
+        }
+        
+        // Cập nhật trạng thái nút
+        function updateButtonState(type, success) {
+            const btn = type === 'username' 
+                ? document.getElementById('copyAccountBtn')
+                : document.getElementById('copyPasswordBtn');
+            
+            const icon = btn.querySelector('i');
+            const text = btn.querySelector('span');
+            
+            if (success) {
+                // Hiệu ứng thành công
+                btn.style.backgroundColor = type === 'username' ? '#d4edda' : '#c3e6cb';
+                icon.className = 'fas fa-check';
+                text.textContent = 'Đã copy';
+                
+                // Trở lại trạng thái ban đầu sau 2s
+                setTimeout(() => {
+                    btn.style.backgroundColor = type === 'username' ? '#e7f3ff' : '#e8f5e9';
+                    icon.className = type === 'username' ? 'far fa-user' : 'fas fa-lock';
+                    text.textContent = type === 'username' ? 'Sao chép tài khoản' : 'Sao chép mật khẩu';
+                }, 2000);
+            } else {
+                // Hiệu ứng thất bại
+                btn.style.backgroundColor = '#f8d7da';
+                icon.className = 'fas fa-times';
+                text.textContent = 'Lỗi!';
+                
+                setTimeout(() => {
+                    btn.style.backgroundColor = type === 'username' ? '#e7f3ff' : '#e8f5e9';
+                    icon.className = type === 'username' ? 'far fa-user' : 'fas fa-lock';
+                    text.textContent = type === 'username' ? 'Sao chép tài khoản' : 'Sao chép mật khẩu';
+                }, 2000);
+            }
+        }
+        
+        // Hiển thị thông báo toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            clearTimeout(window.toastTimeout);
+            window.toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Thiết lập nút mở bằng Safari
+        function setupSafariButton() {
+            document.getElementById('openSafariBtn').addEventListener('click', function() {
+                window.location.href = `https://www.facebook.com/l.php?u=${encodeURIComponent(window.location.href)}`;
+            });
+        }
+    </script>
