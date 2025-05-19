@@ -4,7 +4,8 @@ const path = require("path");
 const crypto = require("crypto");
 
 const app = express();
-const port = 3000;
+// Sử dụng port từ biến môi trường hoặc mặc định là 3000
+const port = process.env.PORT || 3000;
 
 // Đăng nhập cố định cho demo
 const ADMIN_USERNAME = "admin";
@@ -191,6 +192,7 @@ app.get("/logout", (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server đang chạy tại http://localhost:${port}`);
+// Thay đổi phần listen để chấp nhận cả IPv4 và IPv6
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server đang chạy tại port ${port}`);
 });
