@@ -1,6 +1,5 @@
 const express = require("express");
 const path = require("path");
-const fs = require("fs");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -9,21 +8,8 @@ const port = process.env.PORT || 3000;
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
-// Đọc trạng thái bảo trì từ file
-let isMaintenance = false;
-try {
-  const data = fs.readFileSync('maintenance.txt', 'utf8');
-  isMaintenance = data.trim() === 'true';
-} catch (err) {
-  // Nếu file chưa tồn tại, tạo file mới
-  fs.writeFileSync('maintenance.txt', 'false');
-}
-
-// Hàm lưu trạng thái bảo trì
-function saveMaintenanceState(state) {
-  fs.writeFileSync('maintenance.txt', state.toString());
-  isMaintenance = state;
-}
+// Sử dụng biến môi trường để lưu trạng thái bảo trì
+let isMaintenance = process.env.MAINTENANCE_MODE === 'true';
 
 // Trang chính
 app.get("/", (req, res) => {
@@ -34,6 +20,9 @@ app.get("/", (req, res) => {
       <html>
       <head>
         <title>Website đang bảo trì</title>
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="0">
         <style>
           body {
             font-family: Arial, sans-serif;
@@ -84,6 +73,9 @@ app.get("/admin", (req, res) => {
     <html>
     <head>
       <title>Trang Admin</title>
+      <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+      <meta http-equiv="Pragma" content="no-cache">
+      <meta http-equiv="Expires" content="0">
       <style>
         body {
           font-family: Arial, sans-serif;
@@ -174,7 +166,8 @@ app.get("/admin", (req, res) => {
 // Bật bảo trì
 app.post("/maintenance", (req, res) => {
   console.log('Bật chế độ bảo trì');
-  saveMaintenanceState(true);
+  isMaintenance = true;
+  process.env.MAINTENANCE_MODE = 'true';
   console.log('Trạng thái sau khi bật:', isMaintenance);
   res.redirect("/admin");
 });
@@ -182,7 +175,8 @@ app.post("/maintenance", (req, res) => {
 // Mở lại
 app.post("/resume", (req, res) => {
   console.log('Tắt chế độ bảo trì');
-  saveMaintenanceState(false);
+  isMaintenance = false;
+  process.env.MAINTENANCE_MODE = 'false';
   console.log('Trạng thái sau khi tắt:', isMaintenance);
   res.redirect("/admin");
 });
